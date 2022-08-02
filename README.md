@@ -1,2 +1,1 @@
-# broken-location-react
-Created with CodeSandbox
+# recruitment-homework-react-ts
