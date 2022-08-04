@@ -4,7 +4,7 @@ import ReviewForm from 'components/ReviewForm'
 import { useLazyQuery } from '@apollo/client'
 import { GET_LOCATION, ApiShape } from 'api'
 import { LocationBoxContext } from 'contexts/LocationBoxContext'
-import useLastLocationsId from 'hooks/useLocationsId'
+import useLastLocationsId from 'hooks/useLastLocationId'
 import service from './service'
 import './LocationBox.scss'
 
@@ -18,10 +18,10 @@ const LocationBox: React.FC = () => {
   >(GET_LOCATION)
 
   useEffect(() => {
-    if (lastLocationId && shouldReload) {
+    if (lastLocationId) {
       service.fetchLocation({ lastLocationId, getLocation, setLocation, setShouldReload })
     }
-  }, [lastLocationId, shouldReload])
+  }, [lastLocationId, shouldReload, getLocation, setLocation, setShouldReload])
 
   return (
     <div className='LocationBox'>

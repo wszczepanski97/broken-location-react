@@ -1,3 +1,1 @@
-import LocationBox from './LocationBox'
-
-export { LocationBox as default }
+export { default } from './LocationBox'

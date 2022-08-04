@@ -1,3 +1,1 @@
-import LocationBoxContainer from './LocationBoxContainer'
-
-export { LocationBoxContainer as default }
+export { default } from './LocationBoxContainer'

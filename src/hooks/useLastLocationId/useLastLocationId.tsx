@@ -1,15 +1,14 @@
 import { useLazyQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { GET_LOCATIONS_ID, ApiShape } from 'api'
-import { UseLocationsIdProps } from './types'
+import { UseLastLocationIdProps } from './types'
 
-const useLocationsId = (): UseLocationsIdProps => {
+const useLastLocationId = (): UseLastLocationIdProps => {
   const [locationsId, setLocationsId] = useState<string[]>([])
   const [lastLocationId, setLastLocationId] = useState<string>()
 
-  const [getLocationsId, { loading: getLocationsIdLoading }] = useLazyQuery<
-    ApiShape.GetLocationsIdData
-  >(GET_LOCATIONS_ID)
+  const [getLocationsId, { loading: getLocationsIdLoading }] =
+    useLazyQuery<ApiShape.GetLocationsIdData>(GET_LOCATIONS_ID)
 
   useEffect(() => {
     getLocationsId().then(res => {
@@ -20,7 +19,7 @@ const useLocationsId = (): UseLocationsIdProps => {
         setLocationsId(ids)
       }
     })
-  }) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [getLocationsId])
 
   useEffect(() => {
     if (locationsId.length > 0) {
@@ -31,4 +30,4 @@ const useLocationsId = (): UseLocationsIdProps => {
   return { lastLocationId, getLocationsIdLoading }
 }
 
-export default useLocationsId
+export default useLastLocationId

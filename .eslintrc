@@ -9,7 +9,9 @@
   ],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "parserOptions": {
     "ecmaVersion": "latest"

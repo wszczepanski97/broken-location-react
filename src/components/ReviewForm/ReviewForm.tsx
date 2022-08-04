@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { Form, formDefault } from './types'
 import { SEND_REVIEW } from 'api'
 import { useMutation } from '@apollo/client'
-import { ReviewShape } from 'components/Reviews'
 import { LocationBoxContext } from 'contexts/LocationBoxContext'
 import './ReviewForm.scss'
 
@@ -15,36 +14,74 @@ const ReviewForm: React.FC = () => {
   const setValue = (event: React.ChangeEvent<HTMLInputElement>) =>
     void setReview({ ...review, [event.currentTarget.id]: event.currentTarget.value })
 
-  const onSend = () => {
+  const sendForm = () => {
     const { id, comment, rating } = review
     sendReview({ variables: { id, comment, rating: parseInt(rating, 10) } }).then(res => {
-      if (res.data?.success) {
+      if (res.data?.submitReview.success) {
         setShouldReload(true)
       }
     })
   }
 
-  return (
-    <div className='ReviewForm'>
-      <div className='ReviewForm__title'>Your review</div>
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    sendForm()
+  }
 
+  const areFormFieldsFilled = !!(review.id && review.comment && review.rating)
+
+  return (
+    <form
+      className='ReviewForm'
+      onSubmit={onFormSubmit}
+    >
+      <div className='ReviewForm__title'>Your review</div>
       <div>
         <label htmlFor='id'>Id: </label>
-        <input id='id' value={review.id} onChange={setValue} />
+        <input
+          id='id'
+          type='text'
+          value={review.id}
+          onChange={setValue}
+          disabled
+          required
+        />
       </div>
 
       <div>
         <label htmlFor='rating'>Rating: </label>
-        <input id='rating' value={review.rating} onChange={setValue} />
+        <input
+          id='rating'
+          type='text'
+          value={review.rating}
+          pattern='[0-9]+'
+          onChange={setValue}
+          required
+        />
       </div>
 
       <div>
         <label htmlFor='comment'>Comment: </label>
-        <input id='comment' value={review.comment} onChange={setValue} />
+        <input
+          id='comment'
+          type='text'
+          required
+          value={review.comment}
+          onChange={setValue}
+        />
       </div>
 
-      {sendReviewLoading ? <button onClick={onSend}>Send</button> : 'Sending...'}
-    </div>
+      {sendReviewLoading ? (
+        'Sending...'
+      ) : (
+        <button
+          type='submit'
+          disabled={!areFormFieldsFilled}
+        >
+          Send
+        </button>
+      )}
+    </form>
   )
 }
 

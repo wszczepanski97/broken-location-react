@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { ReviewShape } from './types'
 import Review from './Review'
 
@@ -8,3 +8,5 @@ export const Reviews = (reviews: ReviewShape[], last: number): ReactNode => (
     {reviews.slice(-last).map((rev: ReviewShape) => Review(rev))}
   </>
 )
+
+export default Reviews

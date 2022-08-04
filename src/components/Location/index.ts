@@ -1,5 +1,2 @@
-import Location from './Location'
-import { Location } from './types'
-
-export { Location as default }
-export type { Location }
+export { default } from './Location'
+export type { LocationShape } from './types'

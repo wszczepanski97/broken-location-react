@@ -1,3 +1,1 @@
-import ReviewForm from './ReviewForm'
-
-export { ReviewForm as default }
+export { default } from './ReviewForm'

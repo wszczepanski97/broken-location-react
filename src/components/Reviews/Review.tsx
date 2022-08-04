@@ -1,12 +1,9 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { ReviewShape } from './types'
 import './Review.scss'
 
 const Review = (rev: ReviewShape): ReactNode => (
-  <div
-    key={rev.id}
-    className='Review'
-  >
+  <div key={rev.id}>
     <div className='Review__comment'>{rev.comment}</div>
 
     <div>

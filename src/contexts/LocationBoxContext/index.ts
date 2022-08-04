@@ -1,3 +1,1 @@
-import { LocationBoxContext, LocationBoxContextProvider } from './LocationContext'
-
-export { LocationBoxContext, LocationBoxContextProvider }
+export { LocationBoxContext, LocationBoxContextProvider } from './LocationContext'
